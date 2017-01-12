@@ -56,6 +56,7 @@ public class SwipeRefreshListView extends SwipeRefeshBase<ListView> {
         mFootHeight = mFootView.getMeasuredHeight();
         mFootView.setPadding(0, -mFootHeight, 0, 0);
         childView.addFooterView(mFootView, null, false);
+        mFootView.setVisibility(GONE);
     }
 
     boolean isBottom() {

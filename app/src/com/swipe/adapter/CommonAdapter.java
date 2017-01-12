@@ -33,8 +33,8 @@ public class CommonAdapter<T> extends BaseAdapter {
     }
 
     public void invalidateData(List<T> list) {
-        this.list = list;
-        // TODO Auto-generated method stub
+        this.list.clear();
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
 

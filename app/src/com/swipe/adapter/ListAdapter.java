@@ -30,7 +30,7 @@ public class ListAdapter extends CommonAdapter<String> {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.mItem.setText("这是第" + (position + 1) + "条数据~");
-        return super.getView(position, convertView, parent);
+        return convertView;
     }
 
     private class ViewHolder {

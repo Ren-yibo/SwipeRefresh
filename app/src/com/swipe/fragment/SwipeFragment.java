@@ -1,7 +1,6 @@
 package com.swipe.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -169,25 +168,20 @@ public abstract class SwipeFragment extends BaseFragment {
     }
 
     private void resetSwipeView() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isPullRefresh = false;
-                isPullLoad = false;
-                if (null != mSwipeExpandLv) {
-                    mSwipeExpandLv.setRefreshing(false);
-                    mSwipeExpandLv.loadComplete();
-                }
-                if (null != mSwipeListview) {
-                    mSwipeListview.setRefreshing(false);
-                    mSwipeListview.loadComplete();
-                }
-                if (null != mSwipeScroll) {
-                    mSwipeScroll.setRefreshing(false);
-                    mSwipeScroll.loadComplete();
-                }
-            }
-        }, 500);
+        isPullRefresh = false;
+        isPullLoad = false;
+        if (null != mSwipeExpandLv) {
+            mSwipeExpandLv.setRefreshing(false);
+            mSwipeExpandLv.loadComplete();
+        }
+        if (null != mSwipeListview) {
+            mSwipeListview.setRefreshing(false);
+            mSwipeListview.loadComplete();
+        }
+        if (null != mSwipeScroll) {
+            mSwipeScroll.setRefreshing(false);
+            mSwipeScroll.loadComplete();
+        }
     }
 
 }

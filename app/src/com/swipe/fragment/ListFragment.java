@@ -69,8 +69,7 @@ public class ListFragment extends SwipeFragment {
             public void run() {
                 mAdapter.invalidateData(mList);
             }
-        }, 400);
-
+        }, 300);
     }
 
     private int getRandom() {

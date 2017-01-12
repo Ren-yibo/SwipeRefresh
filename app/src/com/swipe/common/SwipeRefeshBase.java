@@ -1,12 +1,14 @@
 package com.swipe.common;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.AlphaAnimation;
 import android.widget.AbsListView;
 
 import com.swipe.R;
@@ -60,6 +62,9 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     protected int mFootHeight;
 
     private onLoadListener iLoadListener;
+    private AlphaAnimation mAppearAnimation;
+    private AlphaAnimation mDisappearAnimation;
+    private int mAnimationDuration = 500;
 
     public SwipeRefeshBase(Context context) {
         super(context);
@@ -74,6 +79,10 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     }
 
     private void initView(Context context) {
+        mAppearAnimation = new AlphaAnimation(0, 1);
+        mAppearAnimation.setDuration(mAnimationDuration);
+        mDisappearAnimation = new AlphaAnimation(1, 0);
+        mDisappearAnimation.setDuration(mAnimationDuration);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mFootView = LayoutInflater.from(mContext).inflate(R.layout.layout_foot, null, false);
     }
@@ -151,7 +160,13 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     private void loadMore() {
         setLoading(true);
         if (iLoadListener != null) {
-            iLoadListener.onLoad();
+            //延迟回调保持与动画时间一致
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    iLoadListener.onLoad();
+                }
+            }, mAnimationDuration);
         }
     }
 
@@ -178,8 +193,10 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     /**
      * 添加加载等待视图
      */
-    protected void addFootView(){
+    protected void addFootView() {
         if (null != childView && null != mFootView) {
+            mFootView.startAnimation(mAppearAnimation);
+            mFootView.setVisibility(VISIBLE);
             mFootView.setPadding(0, 0, 0, 0);
         }
     }
@@ -187,8 +204,10 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     /**
      * 移除加载等待视图
      */
-    protected void removeFootView(){
+    protected void removeFootView() {
         if (null != childView && null != mFootView) {
+            mFootView.startAnimation(mDisappearAnimation);
+            mFootView.setVisibility(GONE);
             mFootView.setPadding(0, -mFootHeight, 0, 0);
         }
     }
@@ -246,4 +265,5 @@ public abstract class SwipeRefeshBase<T extends View> extends SwipeRefreshLayout
     public void setCanLoadMore(boolean canLoadMore) {
         this.canLoadMore = canLoadMore;
     }
+
 }
