@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/homePageTabLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/homePageListLay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/text_style_gray"
+                    android:layout_gravity="center"
+                    android:text="List"
+                    android:textColor="@drawable/selector_home_page" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/homePageExpandLay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/text_style_gray"
+                    android:layout_gravity="center"
+                    android:text="Expand"
+                    android:textColor="@drawable/selector_home_page" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/homePageScrollLay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/text_style_gray"
+                    android:layout_gravity="center"
+                    android:text="Scroll"
+                    android:textColor="@drawable/selector_home_page" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/homePagePager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/homePageTabLay" />
+
+</RelativeLayout>

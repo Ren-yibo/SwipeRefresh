@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="swipe_refresh_view" type="id" />
+    <item name="swipe_refresh_expand" type="id" />
+    <item name="swipe_refresh_lv" type="id" />
+    <item name="swipe_refresh_scroll" type="id" />
+    <item name="swipe_expand" type="id" />
+    <item name="swipe_lv" type="id" />
+    <item name="swipe_scroll" type="id" />
+
+</resources>
